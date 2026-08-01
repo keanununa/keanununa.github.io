@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Chaerin Lee — working drafts in energy markets and mathematics." />
+    <meta name="description" content="Chaerin Lee — research in physical markets, probability, and puzzles." />
     <title>Chaerin Lee</title>
     <link rel="stylesheet" href="styles.css" />
     <script src="script.js" defer></script>
@@ -12,8 +12,8 @@
     <header class="site-header">
       <a class="wordmark" href="#top" aria-label="Chaerin Lee home">Chaerin Lee</a>
       <nav aria-label="Primary navigation">
-        <a href="#energy-markets">energy markets</a>
-        <a href="#mathematics">mathematics</a>
+        <a href="#work">work</a>
+        <a href="#method">method</a>
         <a href="#about">about</a>
       </nav>
     </header>
@@ -21,7 +21,7 @@
     <main>
       <section class="hero" id="top">
         <div class="hero-copy">
-          <p class="kicker">Research portfolio</p>
+          <p class="kicker">Research portfolio · 2026</p>
           <h1>Chaerin<br />Lee</h1>
           <p class="eyebrow">Columbia · Mathematics–Statistics</p>
           <p class="intro">Commodity markets, probability, competitive puzzles.</p>
@@ -43,48 +43,100 @@
             <line id="belief-trace" class="trace" x1="330" y1="220" x2="330" y2="220" />
             <circle id="belief-halo" class="halo" cx="330" cy="220" r="18" />
             <circle id="belief-point" class="point" cx="330" cy="220" r="7" />
-            <text class="vertex-label" x="310" y="26" text-anchor="middle">STATE A</text>
-            <text class="vertex-label" x="55" y="398">STATE B</text>
-            <text class="vertex-label" x="565" y="398" text-anchor="end">STATE C</text>
+            <text class="vertex-label" x="310" y="26" text-anchor="middle">CLAIM</text>
+            <text class="vertex-label" x="55" y="398">EVIDENCE</text>
+            <text class="vertex-label" x="565" y="398" text-anchor="end">BELIEF</text>
           </svg>
           <figcaption><span>possibility space</span><span>move to update belief</span></figcaption>
         </figure>
       </section>
 
-      <section class="drafts" aria-label="Current working drafts">
-        <article class="draft-card" id="energy-markets">
-          <div class="draft-meta"><span>01</span><p>Energy Markets</p></div>
-          <div class="draft-title">
-            <p>Working draft · PDF forthcoming</p>
-            <h2>Constraints That Bind and Constraints That Persist</h2>
+      <section class="work" id="work">
+        <div class="section-heading">
+          <p class="eyebrow">Selected work</p>
+          <h2>Two questions,<br />still being tested.</h2>
+          <p>Each project begins with a claim and records what would make it fail.</p>
+        </div>
+
+        <article class="project project-energy" id="energy-markets">
+          <div class="project-visual network-panel" aria-label="Abstract network of binding and slack constraints">
+            <svg viewBox="0 0 760 540" role="img" aria-labelledby="network-title">
+              <title id="network-title">A network where only a few constraints bind</title>
+              <g class="network-grid">
+                <path d="M70 105H690M70 205H690M70 305H690M70 405H690" />
+                <path d="M135 60V470M265 60V470M395 60V470M525 60V470M655 60V470" />
+              </g>
+              <g class="network-lines">
+                <path d="M100 390L215 315L320 365L445 230L590 285L665 130" />
+                <path d="M100 155L215 315L340 145L445 230L610 105" />
+                <path d="M320 365L520 425L590 285" />
+              </g>
+              <g class="network-bind">
+                <path d="M320 365L445 230" />
+                <path d="M445 230L590 285" />
+              </g>
+              <g class="nodes">
+                <circle cx="100" cy="390" r="8"/><circle cx="215" cy="315" r="8"/>
+                <circle cx="320" cy="365" r="8"/><circle cx="445" cy="230" r="9"/>
+                <circle cx="590" cy="285" r="8"/><circle cx="665" cy="130" r="8"/>
+                <circle cx="100" cy="155" r="8"/><circle cx="340" cy="145" r="8"/>
+                <circle cx="610" cy="105" r="8"/><circle cx="520" cy="425" r="8"/>
+              </g>
+              <text x="68" y="510">present ≠ binding</text>
+              <text x="692" y="510" text-anchor="end">constraint identity matters</text>
+            </svg>
           </div>
-          <span class="draft-mark" aria-hidden="true">○</span>
+          <div class="project-body">
+            <div class="project-index"><span>01</span><span>Energy markets</span></div>
+            <p class="status"><i></i> Framework specified · empirical work next</p>
+            <h3>Constraints That Bind and Constraints That Persist</h3>
+            <p class="subtitle">Measuring the Concentration of Congestion Rent in ERCOT</p>
+            <p class="abstract">A framework for separating how concentrated congestion rent is from whether the identity of binding constraints persists across years. The empirical sections are specified but have not yet been run.</p>
+            <ul class="tags" aria-label="Methods"><li>ERCOT</li><li>congestion</li><li>market structure</li><li>falsification</li></ul>
+            <div class="project-footer"><span>Working draft · revision 1</span><span>PDF forthcoming</span></div>
+          </div>
         </article>
 
-        <article class="draft-card" id="mathematics">
-          <div class="draft-meta"><span>02</span><p>Mathematics</p></div>
-          <div class="draft-title">
-            <p>Working draft · PDF forthcoming</p>
-            <h2>Unproductive Deductions</h2>
+        <article class="project project-sudoku" id="mathematics">
+          <a class="project-visual pdf-preview" href="assets/do-inert-patterns-explain-sudoku-difficulty.pdf" target="_blank" rel="noopener" aria-label="Open Do Inert Patterns Explain Sudoku Difficulty PDF">
+            <img src="assets/sudoku-cover.png" alt="First page of Do Inert Patterns Explain Sudoku Difficulty" />
+            <span>Read the six-page paper ↗</span>
+          </a>
+          <div class="project-body">
+            <div class="project-index"><span>02</span><span>Mathematics · puzzles</span></div>
+            <p class="status complete"><i></i> Pre-specified test complete · hypothesis rejected</p>
+            <h3>Do Inert Patterns Explain Sudoku Difficulty?</h3>
+            <p class="subtitle">A pre-specified falsification study</p>
+            <p class="abstract">A test of whether valid patterns that license no deduction create measurable verification burden. Across 138 puzzles, every specification improved in-sample fit and reduced cross-validated fit; the proposed account failed its stated test.</p>
+            <ul class="tags" aria-label="Methods"><li>Sudoku</li><li>formalization</li><li>cross-validation</li><li>negative result</li></ul>
+            <div class="project-footer"><span>August 2026 · 6 pages</span><a href="assets/do-inert-patterns-explain-sudoku-difficulty.pdf" target="_blank" rel="noopener">Open PDF ↗</a></div>
           </div>
-          <span class="draft-mark" aria-hidden="true">○</span>
         </article>
+      </section>
+
+      <section class="method" id="method">
+        <div><p class="eyebrow">Method</p><h2>A result is useful<br />even when it says no.</h2></div>
+        <ol>
+          <li><span>01</span><div><h3>State the object</h3><p>Separate what is being measured from the proxy used to observe it.</p></div></li>
+          <li><span>02</span><div><h3>Fix the failure condition</h3><p>Decide what evidence would change the claim before seeing the result.</p></div></li>
+          <li><span>03</span><div><h3>Keep the negative result</h3><p>A failed hypothesis narrows the search space and belongs in the record.</p></div></li>
+        </ol>
       </section>
 
       <section class="about" id="about">
         <div><p class="eyebrow">About</p><h2>Chaerin Lee</h2></div>
         <div class="about-copy">
-          <p>Two working drafts. PDFs and short notes will be added when they are ready.</p>
+          <p>Mathematics–Statistics at Columbia. I work on questions that connect physical constraints, information, and decisions.</p>
           <div class="about-links">
-            <a href="https://www.linkedin.com/in/chaerincandoit">LinkedIn</a>
-            <a href="https://github.com/keanununa">GitHub</a>
+            <a href="https://www.linkedin.com/in/chaerincandoit" target="_blank" rel="noopener">LinkedIn ↗</a>
+            <a href="https://github.com/keanununa" target="_blank" rel="noopener">GitHub ↗</a>
           </div>
         </div>
       </section>
     </main>
 
     <footer>
-      <div><p>Chaerin Lee</p><span>Energy Markets · Mathematics</span></div>
+      <div><p>Chaerin Lee</p><span>Energy markets · Mathematics · Puzzles</span></div>
       <a href="#top">Back to top ↑</a>
     </footer>
   </body>
