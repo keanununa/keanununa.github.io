@@ -3,10 +3,19 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Chaerin Lee — research in physical markets, probability, and puzzles." />
+    <meta name="description" content="Chaerin Lee — research in commodity markets, probability, and competitive puzzles." />
+    <meta property="og:title" content="Chaerin Lee — Research Portfolio" />
+    <meta property="og:description" content="Commodity markets, probability, and competitive puzzles." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://keanununa.github.io/" />
+    <meta property="og:image" content="https://keanununa.github.io/assets/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
     <title>Chaerin Lee</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
-    <script src="script.js" defer></script>
   </head>
   <body>
     <header class="site-header">
@@ -21,123 +30,111 @@
     <main>
       <section class="hero" id="top">
         <div class="hero-copy">
-          <p class="kicker">Research portfolio · 2026</p>
-          <h1>Chaerin<br />Lee</h1>
-          <p class="eyebrow">Columbia · Mathematics–Statistics</p>
+          <p class="label">Research portfolio · 2026</p>
+          <h1>Chaerin Lee</h1>
+          <p class="affiliation">Columbia · Mathematics–Statistics</p>
           <p class="intro">Commodity markets, probability, competitive puzzles.</p>
         </div>
-
-        <figure class="belief-figure">
-          <svg id="belief-simplex" viewBox="0 0 620 430" role="img" aria-labelledby="simplex-title simplex-desc">
-            <title id="simplex-title">Interactive belief simplex</title>
-            <desc id="simplex-desc">Move across a triangular possibility space to update the marked belief.</desc>
-            <path class="plane plane-a" d="M310 48 L80 370 L310 370 Z" />
-            <path class="plane plane-b" d="M310 48 L310 370 L540 370 Z" />
-            <path class="outline" d="M310 48 L80 370 L540 370 Z" />
-            <path class="decision" d="M195 209 L425 209" />
-            <path class="decision" d="M310 48 L310 370" />
-            <path class="decision faint" d="M147 276 L473 276" />
-            <circle class="signal signal-a" cx="310" cy="48" r="4" />
-            <circle class="signal signal-b" cx="80" cy="370" r="4" />
-            <circle class="signal signal-c" cx="540" cy="370" r="4" />
-            <line id="belief-trace" class="trace" x1="330" y1="220" x2="330" y2="220" />
-            <circle id="belief-halo" class="halo" cx="330" cy="220" r="18" />
-            <circle id="belief-point" class="point" cx="330" cy="220" r="7" />
-            <text class="vertex-label" x="310" y="26" text-anchor="middle">CLAIM</text>
-            <text class="vertex-label" x="55" y="398">EVIDENCE</text>
-            <text class="vertex-label" x="565" y="398" text-anchor="end">BELIEF</text>
-          </svg>
-          <figcaption><span>possibility space</span><span>move to update belief</span></figcaption>
-        </figure>
+        <aside class="current-note" aria-label="Current research record">
+          <p class="label">Current record</p>
+          <dl>
+            <div><dt>138</dt><dd>puzzles in the primary test</dd></div>
+            <div><dt>5 × 20</dt><dd>cross-validation folds and seeds</dd></div>
+            <div><dt>4 / 4</dt><dd>metrics with lower out-of-sample fit</dd></div>
+          </dl>
+        </aside>
       </section>
 
       <section class="work" id="work">
-        <div class="section-heading">
-          <p class="eyebrow">Selected work</p>
-          <h2>Two questions,<br />still being tested.</h2>
-          <p>Each project begins with a claim and records what would make it fail.</p>
-        </div>
+        <header class="section-heading">
+          <p class="label">01 · Completed study</p>
+          <h2>Do Inert Patterns Explain Sudoku Difficulty?</h2>
+          <p>A pre-specified falsification study using human solving-time data.</p>
+        </header>
 
-        <article class="project project-energy" id="energy-markets">
-          <div class="project-visual network-panel" aria-label="Abstract network of binding and slack constraints">
-            <svg viewBox="0 0 760 540" role="img" aria-labelledby="network-title">
-              <title id="network-title">A network where only a few constraints bind</title>
-              <g class="network-grid">
-                <path d="M70 105H690M70 205H690M70 305H690M70 405H690" />
-                <path d="M135 60V470M265 60V470M395 60V470M525 60V470M655 60V470" />
+        <article class="featured-project">
+          <figure class="result-chart">
+            <svg viewBox="0 0 920 620" role="img" aria-labelledby="chart-title chart-desc">
+              <title id="chart-title">Incremental model fit in-sample and under cross-validation</title>
+              <desc id="chart-desc">For all four added metrics, in-sample R-squared increased while cross-validated R-squared decreased.</desc>
+              <text class="chart-kicker" x="72" y="62">INCREMENTAL R² OVER CONTROL MODEL</text>
+              <text class="chart-note" x="72" y="94">n = 138 · five folds · twenty random seeds</text>
+              <g class="axis">
+                <line x1="72" y1="510" x2="858" y2="510" />
+                <line x1="563" y1="118" x2="563" y2="510" />
+                <text x="72" y="544">−0.025</text><text x="268" y="544">−0.015</text>
+                <text x="465" y="544">−0.005</text><text x="563" y="544">0</text>
+                <text x="661" y="544">+0.005</text><text x="858" y="544" text-anchor="end">+0.015</text>
               </g>
-              <g class="network-lines">
-                <path d="M100 390L215 315L320 365L445 230L590 285L665 130" />
-                <path d="M100 155L215 315L340 145L445 230L610 105" />
-                <path d="M320 365L520 425L590 285" />
+              <g class="chart-row" transform="translate(0 155)">
+                <text class="metric" x="72" y="0">IER · primary</text>
+                <rect class="in-sample" x="563" y="18" width="138" height="13" /><text class="value positive" x="711" y="29">+0.0070</text>
+                <rect class="cv" x="431" y="39" width="132" height="13" /><text class="value negative" x="421" y="50" text-anchor="end">−0.0067</text>
               </g>
-              <g class="network-bind">
-                <path d="M320 365L445 230" />
-                <path d="M445 230L590 285" />
+              <g class="chart-row" transform="translate(0 245)">
+                <text class="metric" x="72" y="0">Exposure-weighted ratio</text>
+                <rect class="in-sample" x="563" y="18" width="4" height="13" /><text class="value positive" x="577" y="29">+0.0002</text>
+                <rect class="cv" x="99" y="39" width="464" height="13" /><text class="value negative" x="89" y="50" text-anchor="end">−0.0236</text>
               </g>
-              <g class="nodes">
-                <circle cx="100" cy="390" r="8"/><circle cx="215" cy="315" r="8"/>
-                <circle cx="320" cy="365" r="8"/><circle cx="445" cy="230" r="9"/>
-                <circle cx="590" cy="285" r="8"/><circle cx="665" cy="130" r="8"/>
-                <circle cx="100" cy="155" r="8"/><circle cx="340" cy="145" r="8"/>
-                <circle cx="610" cy="105" r="8"/><circle cx="520" cy="425" r="8"/>
+              <g class="chart-row" transform="translate(0 335)">
+                <text class="metric" x="72" y="0">Raw inert count</text>
+                <rect class="in-sample" x="563" y="18" width="59" height="13" /><text class="value positive" x="632" y="29">+0.0030</text>
+                <rect class="cv" x="235" y="39" width="328" height="13" /><text class="value negative" x="225" y="50" text-anchor="end">−0.0167</text>
               </g>
-              <text x="68" y="510">present ≠ binding</text>
-              <text x="692" y="510" text-anchor="end">constraint identity matters</text>
+              <g class="chart-row" transform="translate(0 425)">
+                <text class="metric" x="72" y="0">Expected entry cost</text>
+                <rect class="in-sample" x="563" y="18" width="230" height="13" /><text class="value positive" x="803" y="29">+0.0117</text>
+                <rect class="cv" x="484" y="39" width="79" height="13" /><text class="value negative" x="474" y="50" text-anchor="end">−0.0040</text>
+              </g>
+              <g class="legend">
+                <rect class="in-sample" x="72" y="584" width="18" height="8" /><text x="100" y="592">in-sample ΔR²</text>
+                <rect class="cv" x="244" y="584" width="18" height="8" /><text x="272" y="592">cross-validated ΔR²</text>
+              </g>
             </svg>
-          </div>
-          <div class="project-body">
-            <div class="project-index"><span>01</span><span>Energy markets</span></div>
-            <p class="status"><i></i> Framework specified · empirical work next</p>
-            <h3>Constraints That Bind and Constraints That Persist</h3>
-            <p class="subtitle">Measuring the Concentration of Congestion Rent in ERCOT</p>
-            <p class="abstract">A framework for separating how concentrated congestion rent is from whether the identity of binding constraints persists across years. The empirical sections are specified but have not yet been run.</p>
-            <ul class="tags" aria-label="Methods"><li>ERCOT</li><li>congestion</li><li>market structure</li><li>falsification</li></ul>
-            <div class="project-footer"><span>Working draft · revision 1</span><span>PDF forthcoming</span></div>
+            <figcaption>Every added metric improved in-sample fit and reduced cross-validated fit.</figcaption>
+          </figure>
+
+          <div class="project-copy">
+            <div class="status"><span></span>Test complete · hypothesis rejected</div>
+            <p class="abstract">The study asks whether structurally valid patterns that license no deduction create a measurable verification burden. The proposed metric failed its pre-specified test: it added no out-of-sample predictive value for this corpus.</p>
+            <dl class="study-facts">
+              <div><dt>Object</dt><dd>Inert-at-entry ratio</dd></div>
+              <div><dt>Outcome</dt><dd>−0.0067 cross-validated ΔR²</dd></div>
+              <div><dt>Interpretation</dt><dd>Negative result retained</dd></div>
+            </dl>
+            <ul class="tags" aria-label="Topics"><li>Sudoku</li><li>formalization</li><li>cross-validation</li><li>negative result</li></ul>
+            <a class="paper-link" href="assets/do-inert-patterns-explain-sudoku-difficulty.pdf" target="_blank" rel="noopener">Read the six-page paper <span>↗</span></a>
           </div>
         </article>
 
-        <article class="project project-sudoku" id="mathematics">
-          <a class="project-visual pdf-preview" href="assets/do-inert-patterns-explain-sudoku-difficulty.pdf" target="_blank" rel="noopener" aria-label="Open Do Inert Patterns Explain Sudoku Difficulty PDF">
-            <img src="assets/sudoku-cover.png" alt="First page of Do Inert Patterns Explain Sudoku Difficulty" />
-            <span>Read the six-page paper ↗</span>
-          </a>
-          <div class="project-body">
-            <div class="project-index"><span>02</span><span>Mathematics · puzzles</span></div>
-            <p class="status complete"><i></i> Pre-specified test complete · hypothesis rejected</p>
-            <h3>Do Inert Patterns Explain Sudoku Difficulty?</h3>
-            <p class="subtitle">A pre-specified falsification study</p>
-            <p class="abstract">A test of whether valid patterns that license no deduction create measurable verification burden. Across 138 puzzles, every specification improved in-sample fit and reduced cross-validated fit; the proposed account failed its stated test.</p>
-            <ul class="tags" aria-label="Methods"><li>Sudoku</li><li>formalization</li><li>cross-validation</li><li>negative result</li></ul>
-            <div class="project-footer"><span>August 2026 · 6 pages</span><a href="assets/do-inert-patterns-explain-sudoku-difficulty.pdf" target="_blank" rel="noopener">Open PDF ↗</a></div>
+        <article class="in-progress" id="energy-markets">
+          <div><p class="label">02 · In progress</p><h3>Constraints That Bind and Constraints That Persist</h3></div>
+          <div>
+            <p class="subtitle">Measuring the concentration of congestion rent in ERCOT.</p>
+            <p>The measurement framework is specified; the empirical sections have not yet been run.</p>
           </div>
+          <ul class="tags" aria-label="Topics"><li>ERCOT</li><li>congestion</li><li>constraint identity</li></ul>
         </article>
       </section>
 
       <section class="method" id="method">
-        <div><p class="eyebrow">Method</p><h2>A result is useful<br />even when it says no.</h2></div>
+        <div class="method-heading"><p class="label">Method</p><h2>A result remains useful when it says no.</h2></div>
         <ol>
-          <li><span>01</span><div><h3>State the object</h3><p>Separate what is being measured from the proxy used to observe it.</p></div></li>
+          <li><span>01</span><div><h3>Define the object</h3><p>Separate what is being measured from the proxy used to observe it.</p></div></li>
           <li><span>02</span><div><h3>Fix the failure condition</h3><p>Decide what evidence would change the claim before seeing the result.</p></div></li>
           <li><span>03</span><div><h3>Keep the negative result</h3><p>A failed hypothesis narrows the search space and belongs in the record.</p></div></li>
         </ol>
       </section>
 
       <section class="about" id="about">
-        <div><p class="eyebrow">About</p><h2>Chaerin Lee</h2></div>
+        <div><p class="label">About</p><h2>Chaerin Lee</h2></div>
         <div class="about-copy">
-          <p>Mathematics–Statistics at Columbia. I work on questions that connect physical constraints, information, and decisions.</p>
-          <div class="about-links">
-            <a href="https://www.linkedin.com/in/chaerincandoit" target="_blank" rel="noopener">LinkedIn ↗</a>
-            <a href="https://github.com/keanununa" target="_blank" rel="noopener">GitHub ↗</a>
-          </div>
+          <p>Current work: a completed pre-specified test on 138 Sudoku puzzles, and an ERCOT measurement framework awaiting empirical results.</p>
+          <a href="https://www.linkedin.com/in/chaerincandoit" target="_blank" rel="noopener">LinkedIn ↗</a>
         </div>
       </section>
     </main>
 
-    <footer>
-      <div><p>Chaerin Lee</p><span>Energy markets · Mathematics · Puzzles</span></div>
-      <a href="#top">Back to top ↑</a>
-    </footer>
+    <footer><div><p>Chaerin Lee</p><span>Commodity markets · Probability · Puzzles</span></div><a href="#top">Back to top ↑</a></footer>
   </body>
 </html>
