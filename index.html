@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Chaerin Lee — working drafts in energy markets and mathematics." />
+    <title>Chaerin Lee</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="wordmark" href="#top" aria-label="Chaerin Lee home">Chaerin Lee</a>
+      <nav aria-label="Primary navigation">
+        <a href="#energy-markets">energy markets</a>
+        <a href="#mathematics">mathematics</a>
+        <a href="#about">about</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" id="top">
+        <div class="hero-copy">
+          <p class="kicker">Research portfolio</p>
+          <h1>Chaerin<br />Lee</h1>
+          <p class="eyebrow">Columbia · Mathematics–Statistics</p>
+          <p class="intro">Commodity markets, probability, competitive puzzles.</p>
+        </div>
+
+        <figure class="belief-figure">
+          <svg id="belief-simplex" viewBox="0 0 620 430" role="img" aria-labelledby="simplex-title simplex-desc">
+            <title id="simplex-title">Interactive belief simplex</title>
+            <desc id="simplex-desc">Move across a triangular possibility space to update the marked belief.</desc>
+            <path class="plane plane-a" d="M310 48 L80 370 L310 370 Z" />
+            <path class="plane plane-b" d="M310 48 L310 370 L540 370 Z" />
+            <path class="outline" d="M310 48 L80 370 L540 370 Z" />
+            <path class="decision" d="M195 209 L425 209" />
+            <path class="decision" d="M310 48 L310 370" />
+            <path class="decision faint" d="M147 276 L473 276" />
+            <circle class="signal signal-a" cx="310" cy="48" r="4" />
+            <circle class="signal signal-b" cx="80" cy="370" r="4" />
+            <circle class="signal signal-c" cx="540" cy="370" r="4" />
+            <line id="belief-trace" class="trace" x1="330" y1="220" x2="330" y2="220" />
+            <circle id="belief-halo" class="halo" cx="330" cy="220" r="18" />
+            <circle id="belief-point" class="point" cx="330" cy="220" r="7" />
+            <text class="vertex-label" x="310" y="26" text-anchor="middle">STATE A</text>
+            <text class="vertex-label" x="55" y="398">STATE B</text>
+            <text class="vertex-label" x="565" y="398" text-anchor="end">STATE C</text>
+          </svg>
+          <figcaption><span>possibility space</span><span>move to update belief</span></figcaption>
+        </figure>
+      </section>
+
+      <section class="drafts" aria-label="Current working drafts">
+        <article class="draft-card" id="energy-markets">
+          <div class="draft-meta"><span>01</span><p>Energy Markets</p></div>
+          <div class="draft-title">
+            <p>Working draft · PDF forthcoming</p>
+            <h2>Constraints That Bind and Constraints That Persist</h2>
+          </div>
+          <span class="draft-mark" aria-hidden="true">○</span>
+        </article>
+
+        <article class="draft-card" id="mathematics">
+          <div class="draft-meta"><span>02</span><p>Mathematics</p></div>
+          <div class="draft-title">
+            <p>Working draft · PDF forthcoming</p>
+            <h2>Unproductive Deductions</h2>
+          </div>
+          <span class="draft-mark" aria-hidden="true">○</span>
+        </article>
+      </section>
+
+      <section class="about" id="about">
+        <div><p class="eyebrow">About</p><h2>Chaerin Lee</h2></div>
+        <div class="about-copy">
+          <p>Two working drafts. PDFs and short notes will be added when they are ready.</p>
+          <div class="about-links">
+            <a href="https://www.linkedin.com/in/chaerincandoit">LinkedIn</a>
+            <a href="https://github.com/keanununa">GitHub</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div><p>Chaerin Lee</p><span>Energy Markets · Mathematics</span></div>
+      <a href="#top">Back to top ↑</a>
+    </footer>
+  </body>
+</html>
