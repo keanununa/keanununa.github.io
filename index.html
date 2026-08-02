@@ -15,8 +15,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500&amp;display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css?v=20260802-2" />
-    <script src="script.js?v=20260801-5" defer></script>
+    <link rel="stylesheet" href="styles.css?v=20260802-3" />
+    <script src="script.js?v=20260802-1" defer></script>
   </head>
   <body>
     <header class="site-header">
@@ -86,13 +86,22 @@
 
       <section class="research-section" id="mathematics">
         <h2>Mathematics research</h2>
-        <figure class="mini-lab path-lab">
+        <figure class="mini-lab nim-lab">
           <div class="lab-heading">
-            <p class="label">Lattice paths</p>
-            <output id="path-count" aria-live="polite">252 paths</output>
+            <p class="label">Nim · Combinatorial game theory</p>
+            <output id="nim-score" aria-live="polite">You 0 · Opponent 0</output>
           </div>
-          <div id="path-grid" class="path-grid" role="grid" aria-label="Five by five lattice path grid. Select an interior point to block it."></div>
-          <figcaption>Choose an interior point. Paths move right or down.</figcaption>
+          <p id="nim-status" class="nim-status" aria-live="polite">You move first. Take any number of stones from one pile.</p>
+          <div id="nim-board" class="nim-board" aria-label="Nim board"></div>
+          <div class="nim-controls">
+            <button id="nim-take" class="lab-action" type="button" disabled>Take selected</button>
+            <button id="nim-new" class="lab-action" type="button">New game</button>
+          </div>
+          <details id="nim-explanation" class="nim-explanation" hidden>
+            <summary>Show why</summary>
+            <div id="nim-proof"></div>
+          </details>
+          <figcaption>The last player to take a stone wins. The opponent plays perfectly.</figcaption>
         </figure>
         <article class="project-card">
           <h3>Do Inert Patterns Explain Sudoku Difficulty?</h3>
