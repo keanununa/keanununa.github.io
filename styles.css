@@ -303,55 +303,95 @@ figcaption p {
   font-weight: 600;
 }
 
-.path-grid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  width: min(100%, 480px);
-  aspect-ratio: 1;
-  border-right: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
+.nim-status {
+  max-width: 62ch;
+  margin-bottom: 32px;
 }
 
-.path-node {
-  position: relative;
-  min-width: 0;
+.nim-board {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  max-width: 720px;
+}
+
+.nim-pile {
+  min-height: 160px;
+  padding: 24px;
+  border: 1px solid var(--line);
+}
+
+.nim-pile-label {
+  margin-bottom: 24px;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.nim-stones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.nim-stone {
+  width: 32px;
+  height: 32px;
   padding: 0;
-  border: 0;
-  border-top: 1px solid var(--line);
-  border-left: 1px solid var(--line);
-  border-radius: 0;
-  background: transparent;
-  color: var(--ink);
+  border: 1px solid var(--ink);
+  border-radius: 50%;
+  background: var(--ink);
   cursor: pointer;
 }
 
-.path-node::after {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: currentColor;
-  content: "";
-  transform: translate(-50%, -50%);
+.nim-stone:hover,
+.nim-stone:focus-visible {
+  background: var(--muted);
 }
 
-.path-node:hover::after,
-.path-node.is-blocked::after {
-  width: 16px;
-  height: 16px;
+.nim-stone.is-selected {
+  border-style: dashed;
+  background: transparent;
 }
 
-.path-node.is-blocked::before {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(45deg, transparent calc(50% - 1px), var(--ink) 50%, transparent calc(50% + 1px));
-  content: "";
+.nim-controls {
+  display: flex;
+  gap: 24px;
 }
 
-.path-node.is-endpoint {
+.nim-controls .lab-action:disabled {
+  border-color: var(--line);
+  color: var(--muted);
   cursor: default;
+}
+
+.nim-explanation {
+  max-width: 62ch;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+
+.nim-explanation summary {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.nim-proof {
+  margin-top: 24px;
+}
+
+.nim-proof p:last-child {
+  margin-bottom: 0;
+}
+
+.nim-binary {
+  font-family: var(--mono);
+  font-size: 12px;
+  white-space: pre;
 }
 
 .sudoku-grid {
@@ -529,6 +569,15 @@ button.sudoku-cell.is-selected {
     align-items: flex-start;
     flex-direction: column;
     gap: 8px;
+  }
+
+  .nim-board {
+    grid-template-columns: 1fr;
+  }
+
+  .nim-pile {
+    min-height: 0;
+    padding: 16px;
   }
 
   .sudoku-cell {
