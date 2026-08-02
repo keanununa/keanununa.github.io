@@ -15,8 +15,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500&amp;display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css?v=20260801-4" />
-    <script src="script.js?v=20260801-3" defer></script>
+    <link rel="stylesheet" href="styles.css?v=20260801-5" />
+    <script src="script.js?v=20260801-5" defer></script>
   </head>
   <body>
     <header class="site-header">
@@ -106,27 +106,17 @@
         <h2>Puzzles</h2>
         <figure class="mini-lab sudoku-lab">
           <div class="lab-heading">
-            <p class="label">Candidate grid</p>
-            <output id="sudoku-result" aria-live="polite">2 · 7 appears twice</output>
+            <p class="label">Favorite Sudoku</p>
+            <output id="sudoku-result" aria-live="polite">20 clues</output>
           </div>
-          <div id="sudoku-grid" class="sudoku-grid" aria-label="Sudoku box containing a naked pair">
-            <button class="sudoku-cell pair-cell" type="button" data-candidates="2,7" aria-label="Candidates 2 and 7. Apply naked pair."><span>2</span><span>7</span></button>
-            <button class="sudoku-cell pair-cell" type="button" data-candidates="2,7" aria-label="Candidates 2 and 7. Apply naked pair."><span>2</span><span>7</span></button>
-            <div class="sudoku-cell" data-candidates="1,2,5"><span>1</span><span data-remove>2</span><span>5</span></div>
-            <div class="sudoku-cell" data-candidates="3,6"><span>3</span><span>6</span></div>
-            <div class="sudoku-cell" data-candidates="4,7,8"><span>4</span><span data-remove>7</span><span>8</span></div>
-            <div class="sudoku-cell" data-candidates="2,5"><span data-remove>2</span><span>5</span></div>
-            <div class="sudoku-cell" data-candidates="1,8"><span>1</span><span>8</span></div>
-            <div class="sudoku-cell" data-candidates="4,7"><span>4</span><span data-remove>7</span></div>
-            <div class="sudoku-cell" data-candidates="3,9"><span>3</span><span>9</span></div>
-          </div>
+          <div id="sudoku-grid" class="sudoku-grid" role="grid" aria-label="Nikoli Sudoku number 198"></div>
           <button id="sudoku-reset" class="lab-action" type="button" hidden>Reset</button>
-          <figcaption>Select either 2 · 7 cell.</figcaption>
+          <figcaption>Select an empty cell, then type 1–9. Delete or Backspace clears it.</figcaption>
         </figure>
         <article class="project-card">
-          <h3>Puzzle post-mortems</h3>
-          <p class="result">0 published. First post-mortem in preparation.</p>
-          <p class="status">in progress</p>
+          <h3>Favorite Sudoku: No. 198</h3>
+          <p class="result">Nikoli Publishing · Genius level · No. 198.</p>
+          <p class="puzzle-note">I found it logically beautiful after solving it.</p>
         </article>
       </section>
     </main>
