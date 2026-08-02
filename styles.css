@@ -32,7 +32,8 @@ a {
 }
 
 a:focus-visible,
-.simplex:focus-visible {
+.simplex:focus-visible,
+button:focus-visible {
   outline: 2px solid var(--ink);
   outline-offset: 8px;
 }
@@ -255,6 +256,138 @@ figcaption p {
   border-bottom: 1px solid var(--line);
 }
 
+.mini-lab {
+  max-width: 960px;
+  margin: 0 0 48px;
+  padding: 32px;
+  border: 1px solid var(--line);
+}
+
+.lab-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.lab-heading p,
+.lab-heading output {
+  margin: 0;
+}
+
+.lab-heading output,
+.lab-action {
+  font-family: var(--mono);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.path-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  width: min(100%, 480px);
+  aspect-ratio: 1;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.path-node {
+  position: relative;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+  border-radius: 0;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.path-node::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+  content: "";
+  transform: translate(-50%, -50%);
+}
+
+.path-node:hover::after,
+.path-node.is-blocked::after {
+  width: 16px;
+  height: 16px;
+}
+
+.path-node.is-blocked::before {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, transparent calc(50% - 1px), var(--ink) 50%, transparent calc(50% + 1px));
+  content: "";
+}
+
+.path-node.is-endpoint {
+  cursor: default;
+}
+
+.sudoku-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: min(100%, 480px);
+  aspect-ratio: 1;
+  border-top: 2px solid var(--ink);
+  border-left: 2px solid var(--ink);
+}
+
+.sudoku-cell {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  justify-items: center;
+  min-width: 0;
+  padding: 8px;
+  border: 0;
+  border-right: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 12px;
+}
+
+.pair-cell {
+  cursor: pointer;
+}
+
+.pair-cell:hover {
+  background: rgba(24, 32, 29, 0.06);
+}
+
+.sudoku-cell span.is-removed {
+  opacity: 0;
+}
+
+.sudoku-cell.is-single {
+  display: flex;
+  justify-content: center;
+  font-family: var(--serif);
+  font-size: 48px;
+}
+
+.lab-action {
+  margin-top: 24px;
+  padding: 8px 0;
+  border: 0;
+  border-bottom: 1px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+}
+
 .project-card {
   max-width: 960px;
   padding: 32px;
@@ -356,6 +489,21 @@ figcaption p {
 
   .project-card {
     padding: 24px 0;
+  }
+
+  .mini-lab {
+    padding: 16px;
+  }
+
+  .lab-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .sudoku-cell {
+    padding: 0;
+    font-size: 10px;
   }
 
 }
