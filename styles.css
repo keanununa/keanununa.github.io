@@ -356,7 +356,7 @@ figcaption p {
 
 .sudoku-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(9, 1fr);
   width: min(100%, 480px);
   aspect-ratio: 1;
   border-top: 2px solid var(--ink);
@@ -364,38 +364,52 @@ figcaption p {
 }
 
 .sudoku-cell {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
   align-items: center;
-  justify-items: center;
+  justify-content: center;
   min-width: 0;
-  padding: 8px;
+  padding: 0;
   border: 0;
-  border-right: 2px solid var(--ink);
-  border-bottom: 2px solid var(--ink);
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
   background: transparent;
   color: var(--ink);
-  font-family: var(--mono);
-  font-size: 12px;
+  font-family: var(--serif);
+  font-size: 24px;
 }
 
-.pair-cell {
+.sudoku-cell:nth-child(3n) {
+  border-right: 2px solid var(--ink);
+}
+
+.sudoku-cell:nth-child(n + 19):nth-child(-n + 27),
+.sudoku-cell:nth-child(n + 46):nth-child(-n + 54),
+.sudoku-cell:nth-child(n + 73):nth-child(-n + 81) {
+  border-bottom: 2px solid var(--ink);
+}
+
+button.sudoku-cell {
   cursor: pointer;
 }
 
-.pair-cell:hover {
+button.sudoku-cell:hover,
+button.sudoku-cell:focus,
+button.sudoku-cell.is-selected {
   background: rgba(24, 32, 29, 0.06);
+  outline: 0;
 }
 
-.sudoku-cell span.is-removed {
-  opacity: 0;
+.sudoku-cell.is-given {
+  font-weight: 500;
 }
 
-.sudoku-cell.is-single {
-  display: flex;
-  justify-content: center;
-  font-family: var(--serif);
-  font-size: 48px;
+.sudoku-cell.is-entry {
+  color: var(--accent);
+}
+
+.puzzle-note {
+  margin-bottom: 0;
 }
 
 .lab-action {
@@ -522,8 +536,7 @@ figcaption p {
   }
 
   .sudoku-cell {
-    padding: 0;
-    font-size: 10px;
+    font-size: 16px;
   }
 
 }
