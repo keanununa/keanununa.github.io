@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Chaerin Lee — research in commodity markets, probability, and competitive puzzles." />
-    <meta property="og:title" content="Chaerin Lee — Research Portfolio" />
-    <meta property="og:description" content="Commodity markets, probability, and competitive puzzles." />
+    <meta name="description" content="Chaerin Lee. Commodity and mathematics research at Columbia University." />
+    <meta property="og:title" content="Chaerin Lee" />
+    <meta property="og:description" content="Commodity and mathematics research at Columbia University." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://keanununa.github.io/" />
     <meta property="og:image" content="https://keanununa.github.io/assets/og-image.png" />
@@ -14,127 +14,101 @@
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@500;600&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=Newsreader:opsz,wght@6..72,400;6..72,500&amp;display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
   </head>
   <body>
     <header class="site-header">
-      <a class="wordmark" href="#top" aria-label="Chaerin Lee home">Chaerin Lee</a>
+      <a class="wordmark" href="#top">Chaerin Lee</a>
       <nav aria-label="Primary navigation">
-        <a href="#work">work</a>
-        <a href="#method">method</a>
-        <a href="#about">about</a>
+        <a href="#commodity">commodity</a>
+        <a href="#mathematics">mathematics</a>
+        <a href="#log">log</a>
       </nav>
     </header>
 
     <main>
       <section class="hero" id="top">
         <div class="hero-copy">
-          <p class="label">Research portfolio · 2026</p>
           <h1>Chaerin Lee</h1>
-          <p class="affiliation">Columbia · Mathematics–Statistics</p>
-          <p class="intro">Commodity markets, probability, competitive puzzles.</p>
+          <p class="affiliation">Columbia · Mathematics-Statistics</p>
+          <a class="email" href="mailto:chaerin.lee@columbia.edu">chaerin.lee@columbia.edu</a>
         </div>
-        <aside class="current-note" aria-label="Current research record">
-          <p class="label">Current record</p>
-          <dl>
-            <div><dt>138</dt><dd>puzzles in the primary test</dd></div>
-            <div><dt>5 × 20</dt><dd>cross-validation folds and seeds</dd></div>
-            <div><dt>4 / 4</dt><dd>metrics with lower out-of-sample fit</dd></div>
-          </dl>
-        </aside>
+
+        <figure class="simplex-card">
+          <div class="simplex-heading">
+            <p class="label">ATR allocation</p>
+            <p class="as-of">Ethanol week ending 24 Jul 2026 · FX 30 Jul 2026</p>
+          </div>
+
+          <svg id="atr-simplex" class="simplex" viewBox="0 0 600 432" tabindex="0" role="application" aria-labelledby="simplex-title simplex-description">
+            <title id="simplex-title">Brazilian mill ATR allocation simplex</title>
+            <desc id="simplex-description">Use pointer, touch, or arrow keys to allocate output among sugar, anhydrous ethanol, and hydrous ethanol. The three weights always sum to one.</desc>
+            <path class="simplex-fill" d="M300 48 L64 360 L536 360 Z" />
+            <path class="simplex-outline" d="M300 48 L64 360 L536 360 Z" />
+            <path class="simplex-guide" d="M300 48 L300 360 M64 360 L418 204 M536 360 L182 204" />
+            <circle id="simplex-point" class="simplex-point" cx="300" cy="256" r="8" />
+            <text class="vertex" x="300" y="24" text-anchor="middle">SUGAR</text>
+            <text class="vertex" x="48" y="392">ANHYDROUS</text>
+            <text class="vertex" x="552" y="392" text-anchor="end">HYDROUS</text>
+          </svg>
+
+          <div class="weights" aria-live="polite" aria-atomic="true">
+            <div><span class="label">Sugar</span><output id="weight-sugar">33.3%</output></div>
+            <div><span class="label">Anhydrous</span><output id="weight-anhydrous">33.3%</output></div>
+            <div><span class="label">Hydrous</span><output id="weight-hydrous">33.3%</output></div>
+          </div>
+
+          <div class="parity-output">
+            <div><span class="label">Implied No.11 parity</span><output id="parity-price">13.94 c/lb</output></div>
+            <div><span class="label">Blended return</span><output id="blended-return">R$1.3307/kg ATR · R$184.56/t cane</output></div>
+          </div>
+
+          <figcaption>
+            <p>Sugar returns R$0.19/kg ATR more than hydrous at these prices. The 2026/27 sugar mix is 46.1%.</p>
+            <p>POL premium +0.40 c/lb and logistics US$42/t are assumed.</p>
+          </figcaption>
+        </figure>
       </section>
 
-      <section class="work" id="work">
-        <header class="section-heading">
-          <p class="label">01 · Completed study</p>
-          <h2>Do Inert Patterns Explain Sudoku Difficulty?</h2>
-          <p>A pre-specified falsification study using human solving-time data.</p>
-        </header>
-
-        <article class="featured-project">
-          <figure class="result-chart">
-            <svg viewBox="0 0 920 620" role="img" aria-labelledby="chart-title chart-desc">
-              <title id="chart-title">Incremental model fit in-sample and under cross-validation</title>
-              <desc id="chart-desc">For all four added metrics, in-sample R-squared increased while cross-validated R-squared decreased.</desc>
-              <text class="chart-kicker" x="72" y="62">INCREMENTAL R² OVER CONTROL MODEL</text>
-              <text class="chart-note" x="72" y="94">n = 138 · five folds · twenty random seeds</text>
-              <g class="axis">
-                <line x1="72" y1="510" x2="858" y2="510" />
-                <line x1="563" y1="118" x2="563" y2="510" />
-                <text x="72" y="544">−0.025</text><text x="268" y="544">−0.015</text>
-                <text x="465" y="544">−0.005</text><text x="563" y="544">0</text>
-                <text x="661" y="544">+0.005</text><text x="858" y="544" text-anchor="end">+0.015</text>
-              </g>
-              <g class="chart-row" transform="translate(0 155)">
-                <text class="metric" x="72" y="0">IER · primary</text>
-                <rect class="in-sample" x="563" y="18" width="138" height="13" /><text class="value positive" x="711" y="29">+0.0070</text>
-                <rect class="cv" x="431" y="39" width="132" height="13" /><text class="value negative" x="421" y="50" text-anchor="end">−0.0067</text>
-              </g>
-              <g class="chart-row" transform="translate(0 245)">
-                <text class="metric" x="72" y="0">Exposure-weighted ratio</text>
-                <rect class="in-sample" x="563" y="18" width="4" height="13" /><text class="value positive" x="577" y="29">+0.0002</text>
-                <rect class="cv" x="99" y="39" width="464" height="13" /><text class="value negative" x="89" y="50" text-anchor="end">−0.0236</text>
-              </g>
-              <g class="chart-row" transform="translate(0 335)">
-                <text class="metric" x="72" y="0">Raw inert count</text>
-                <rect class="in-sample" x="563" y="18" width="59" height="13" /><text class="value positive" x="632" y="29">+0.0030</text>
-                <rect class="cv" x="235" y="39" width="328" height="13" /><text class="value negative" x="225" y="50" text-anchor="end">−0.0167</text>
-              </g>
-              <g class="chart-row" transform="translate(0 425)">
-                <text class="metric" x="72" y="0">Expected entry cost</text>
-                <rect class="in-sample" x="563" y="18" width="230" height="13" /><text class="value positive" x="803" y="29">+0.0117</text>
-                <rect class="cv" x="484" y="39" width="79" height="13" /><text class="value negative" x="474" y="50" text-anchor="end">−0.0040</text>
-              </g>
-              <g class="legend">
-                <rect class="in-sample" x="72" y="584" width="18" height="8" /><text x="100" y="592">in-sample ΔR²</text>
-                <rect class="cv" x="244" y="584" width="18" height="8" /><text x="272" y="592">cross-validated ΔR²</text>
-              </g>
-            </svg>
-            <figcaption>Every added metric improved in-sample fit and reduced cross-validated fit.</figcaption>
-          </figure>
-
-          <div class="project-copy">
-            <div class="status"><span></span>Test complete · hypothesis rejected</div>
-            <p class="abstract">The study asks whether structurally valid patterns that license no deduction create a measurable verification burden. The proposed metric failed its pre-specified test: it added no out-of-sample predictive value for this corpus.</p>
-            <dl class="study-facts">
-              <div><dt>Object</dt><dd>Inert-at-entry ratio</dd></div>
-              <div><dt>Outcome</dt><dd>−0.0067 cross-validated ΔR²</dd></div>
-              <div><dt>Interpretation</dt><dd>Negative result retained</dd></div>
-            </dl>
-            <ul class="tags" aria-label="Topics"><li>Sudoku</li><li>formalization</li><li>cross-validation</li><li>negative result</li></ul>
-            <a class="paper-link" href="assets/do-inert-patterns-explain-sudoku-difficulty.pdf" target="_blank" rel="noopener">Read the six-page paper <span>↗</span></a>
-          </div>
-        </article>
-
-        <article class="in-progress" id="energy-markets">
-          <div><p class="label">02 · In progress</p><h3>Constraints That Bind and Constraints That Persist</h3></div>
-          <div>
-            <p class="subtitle">Measuring the concentration of congestion rent in ERCOT.</p>
-            <p>The measurement framework is specified; the empirical sections have not yet been run.</p>
-          </div>
-          <ul class="tags" aria-label="Topics"><li>ERCOT</li><li>congestion</li><li>constraint identity</li></ul>
+      <section class="research-section" id="commodity">
+        <h2>Commodity research</h2>
+        <article class="project-card">
+          <h3>Constraints That Bind and Constraints That Persist</h3>
+          <p class="result">Falsified if constraint identity adds 0 information beyond basis volatility.</p>
+          <p class="status">in progress</p>
         </article>
       </section>
 
-      <section class="method" id="method">
-        <div class="method-heading"><p class="label">Method</p><h2>A result remains useful when it says no.</h2></div>
-        <ol>
-          <li><span>01</span><div><h3>Define the object</h3><p>Separate what is being measured from the proxy used to observe it.</p></div></li>
-          <li><span>02</span><div><h3>Fix the failure condition</h3><p>Decide what evidence would change the claim before seeing the result.</p></div></li>
-          <li><span>03</span><div><h3>Keep the negative result</h3><p>A failed hypothesis narrows the search space and belongs in the record.</p></div></li>
-        </ol>
+      <section class="research-section" id="mathematics">
+        <h2>Mathematics research</h2>
+        <article class="project-card">
+          <h3>Do Inert Patterns Explain Sudoku Difficulty?</h3>
+          <p class="result">138 puzzles. 5 x 20 CV folds. All 4 metrics worse out of sample.</p>
+          <p class="status">complete</p>
+          <a class="pdf-link" href="assets/do-inert-patterns-explain-sudoku-difficulty.pdf" target="_blank" rel="noopener">PDF</a>
+        </article>
       </section>
 
-      <section class="about" id="about">
-        <div><p class="label">About</p><h2>Chaerin Lee</h2></div>
-        <div class="about-copy">
-          <p>Current work: a completed pre-specified test on 138 Sudoku puzzles, and an ERCOT measurement framework awaiting empirical results.</p>
-          <a href="https://www.linkedin.com/in/chaerincandoit" target="_blank" rel="noopener">LinkedIn ↗</a>
-        </div>
+      <section class="log-section" id="log">
+        <h2>Log</h2>
+        <article class="log-entry">
+          <time datetime="2026-08-01">01 Aug 2026</time>
+          <p>Sudoku test complete. 138 puzzles. Primary CV ΔR²: -0.0067.</p>
+        </article>
+        <article class="log-entry">
+          <time datetime="2026-07-30">30 Jul 2026</time>
+          <p>ATR inputs updated. Oct-26 sugar: 14.74 c/lb. USD/BRL: 5.0754.</p>
+        </article>
       </section>
     </main>
 
-    <footer><div><p>Chaerin Lee</p><span>Commodity markets · Probability · Puzzles</span></div><a href="#top">Back to top ↑</a></footer>
+    <footer class="site-footer">
+      <a href="mailto:chaerin.lee@columbia.edu">Email</a>
+      <a href="https://www.linkedin.com/in/chaerincandoit" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://github.com/keanununa" target="_blank" rel="noopener">GitHub</a>
+      <a href="cv.pdf">CV</a>
+    </footer>
   </body>
 </html>
