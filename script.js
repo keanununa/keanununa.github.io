@@ -313,27 +313,72 @@ for (let row = 0; row < GRID_SIZE; row += 1) {
 
 updatePathGrid();
 
-const pairCells = document.querySelectorAll(".pair-cell");
-const removableCandidates = document.querySelectorAll("[data-remove]");
+const PUZZLE_198 = "..9.....3.1..7.......5.86...4......7.2.....9.5......8...63.5.......9..1.8.....2..";
+const sudokuGrid = document.querySelector("#sudoku-grid");
 const sudokuResult = document.querySelector("#sudoku-result");
 const sudokuReset = document.querySelector("#sudoku-reset");
+let selectedSudokuCell = null;
 
-function applyNakedPair() {
-  removableCandidates.forEach((candidate) => candidate.classList.add("is-removed"));
-  const solvedCell = document.querySelector('[data-candidates="2,5"]');
-  solvedCell.classList.add("is-single");
-  sudokuResult.value = "4 removed · 1 single";
-  sudokuReset.hidden = false;
+function updateSudokuStatus() {
+  const entries = sudokuGrid.querySelectorAll(".is-entry").length;
+  sudokuResult.value = entries === 0 ? "20 clues" : `${entries} / 61 filled`;
+  sudokuReset.hidden = entries === 0;
 }
 
-function resetSudoku() {
-  removableCandidates.forEach((candidate) => candidate.classList.remove("is-removed"));
-  document.querySelector('[data-candidates="2,5"]').classList.remove("is-single");
-  sudokuResult.value = "2 · 7 appears twice";
-  sudokuReset.hidden = true;
+function selectSudokuCell(cell) {
+  selectedSudokuCell?.classList.remove("is-selected");
+  selectedSudokuCell = cell;
+  cell.classList.add("is-selected");
+  cell.focus();
 }
 
-pairCells.forEach((cell) => cell.addEventListener("click", applyNakedPair));
-sudokuReset.addEventListener("click", resetSudoku);
+function enterSudokuValue(cell, value) {
+  if (/^[1-9]$/.test(value)) {
+    cell.textContent = value;
+    cell.classList.add("is-entry");
+    cell.setAttribute("aria-label", `Row ${cell.dataset.row}, column ${cell.dataset.column}, entered ${value}`);
+  } else if (value === "Backspace" || value === "Delete") {
+    cell.textContent = "";
+    cell.classList.remove("is-entry");
+    cell.setAttribute("aria-label", `Row ${cell.dataset.row}, column ${cell.dataset.column}, empty`);
+  }
+  updateSudokuStatus();
+}
+
+Array.from(PUZZLE_198).forEach((value, index) => {
+  const row = Math.floor(index / 9) + 1;
+  const column = (index % 9) + 1;
+  const given = value !== ".";
+  const cell = document.createElement(given ? "div" : "button");
+  cell.className = `sudoku-cell${given ? " is-given" : ""}`;
+  cell.dataset.row = String(row);
+  cell.dataset.column = String(column);
+  cell.setAttribute("role", "gridcell");
+  cell.setAttribute("aria-label", given ? `Row ${row}, column ${column}, given ${value}` : `Row ${row}, column ${column}, empty`);
+  cell.textContent = given ? value : "";
+  if (!given) {
+    cell.type = "button";
+    cell.addEventListener("click", () => selectSudokuCell(cell));
+    cell.addEventListener("keydown", (event) => {
+      if (/^[1-9]$/.test(event.key) || event.key === "Backspace" || event.key === "Delete") {
+        event.preventDefault();
+        enterSudokuValue(cell, event.key);
+      }
+    });
+  }
+  sudokuGrid.append(cell);
+});
+
+sudokuReset.addEventListener("click", () => {
+  sudokuGrid.querySelectorAll("button.sudoku-cell").forEach((cell) => {
+    cell.textContent = "";
+    cell.classList.remove("is-entry", "is-selected");
+    cell.setAttribute("aria-label", `Row ${cell.dataset.row}, column ${cell.dataset.column}, empty`);
+  });
+  selectedSudokuCell = null;
+  updateSudokuStatus();
+});
+
+updateSudokuStatus();
 
 void ATR_PER_KG_SUGAR_DOMESTIC;
