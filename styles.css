@@ -190,7 +190,7 @@ h3 {
 
 .simplex {
   display: block;
-  width: 100%;
+  width: min(100%, 480px);
   cursor: crosshair;
   touch-action: none;
 }
