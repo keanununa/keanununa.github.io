@@ -257,61 +257,144 @@ reducedMotion.addEventListener("change", () => {
   }
 });
 
-const pathGrid = document.querySelector("#path-grid");
-const pathCount = document.querySelector("#path-count");
-const GRID_SIZE = 6;
-let blockedPathNode = null;
+const NIM_POSITIONS = [[3, 4, 5], [2, 4, 7], [1, 5, 7], [3, 6, 7]];
+const nimBoard = document.querySelector("#nim-board");
+const nimScore = document.querySelector("#nim-score");
+const nimStatus = document.querySelector("#nim-status");
+const nimTake = document.querySelector("#nim-take");
+const nimNew = document.querySelector("#nim-new");
+const nimExplanation = document.querySelector("#nim-explanation");
+const nimProof = document.querySelector("#nim-proof");
+let nimPositionIndex = 0;
+let nimHeaps = [...NIM_POSITIONS[nimPositionIndex]];
+let nimInitialHeaps = [...nimHeaps];
+let nimSelection = null;
+let nimGameOver = false;
+let nimWins = 0;
+let opponentWins = 0;
 
-function countLatticePaths(blocked) {
-  const counts = Array.from({ length: GRID_SIZE }, () => Array(GRID_SIZE).fill(0));
-  counts[0][0] = 1;
-  for (let row = 0; row < GRID_SIZE; row += 1) {
-    for (let column = 0; column < GRID_SIZE; column += 1) {
-      if (blocked && blocked.row === row && blocked.column === column) {
-        counts[row][column] = 0;
-        continue;
-      }
-      if (row === 0 && column === 0) {
-        continue;
-      }
-      counts[row][column] = (row > 0 ? counts[row - 1][column] : 0) + (column > 0 ? counts[row][column - 1] : 0);
-    }
-  }
-  return counts[GRID_SIZE - 1][GRID_SIZE - 1];
+function nimSum(heaps) {
+  return heaps.reduce((sum, heap) => sum ^ heap, 0);
 }
 
-function updatePathGrid() {
-  pathCount.value = `${countLatticePaths(blockedPathNode)} paths`;
-  pathGrid.querySelectorAll(".path-node").forEach((node) => {
-    const isBlocked = blockedPathNode && Number(node.dataset.row) === blockedPathNode.row && Number(node.dataset.column) === blockedPathNode.column;
-    node.classList.toggle("is-blocked", Boolean(isBlocked));
-    node.setAttribute("aria-pressed", String(Boolean(isBlocked)));
+function winningNimMove(heaps) {
+  const sum = nimSum(heaps);
+  if (sum !== 0) {
+    for (let pile = 0; pile < heaps.length; pile += 1) {
+      const target = heaps[pile] ^ sum;
+      if (target < heaps[pile]) {
+        return { pile, take: heaps[pile] - target };
+      }
+    }
+  }
+  const pile = heaps.findIndex((heap) => heap > 0);
+  return { pile, take: 1 };
+}
+
+function renderNim() {
+  nimBoard.replaceChildren();
+  nimHeaps.forEach((heap, pileIndex) => {
+    const pile = document.createElement("div");
+    pile.className = "nim-pile";
+    const label = document.createElement("p");
+    label.className = "nim-pile-label";
+    label.textContent = `Pile ${pileIndex + 1} · ${heap}`;
+    const stones = document.createElement("div");
+    stones.className = "nim-stones";
+
+    for (let stoneIndex = 0; stoneIndex < heap; stoneIndex += 1) {
+      const take = heap - stoneIndex;
+      const stone = document.createElement("button");
+      stone.type = "button";
+      stone.className = "nim-stone";
+      stone.setAttribute("aria-label", `Take ${take} from pile ${pileIndex + 1}`);
+      const selected = nimSelection && nimSelection.pile === pileIndex && stoneIndex >= heap - nimSelection.take;
+      stone.classList.toggle("is-selected", Boolean(selected));
+      stone.setAttribute("aria-pressed", String(Boolean(selected)));
+      stone.disabled = nimGameOver;
+      stone.addEventListener("click", () => {
+        nimSelection = { pile: pileIndex, take };
+        nimTake.disabled = false;
+        nimStatus.textContent = `Take ${take} from pile ${pileIndex + 1}?`;
+        renderNim();
+      });
+      stones.append(stone);
+    }
+    pile.append(label, stones);
+    nimBoard.append(pile);
   });
 }
 
-for (let row = 0; row < GRID_SIZE; row += 1) {
-  for (let column = 0; column < GRID_SIZE; column += 1) {
-    const node = document.createElement("button");
-    const endpoint = (row === 0 && column === 0) || (row === GRID_SIZE - 1 && column === GRID_SIZE - 1);
-    node.type = "button";
-    node.className = `path-node${endpoint ? " is-endpoint" : ""}`;
-    node.dataset.row = String(row);
-    node.dataset.column = String(column);
-    node.setAttribute("role", "gridcell");
-    node.setAttribute("aria-label", endpoint ? (row === 0 ? "Start" : "Finish") : `Point ${row + 1}, ${column + 1}`);
-    node.disabled = endpoint;
-    if (!endpoint) {
-      node.addEventListener("click", () => {
-        const selected = { row, column };
-        blockedPathNode = blockedPathNode && blockedPathNode.row === row && blockedPathNode.column === column ? null : selected;
-        updatePathGrid();
-      });
-    }
-    pathGrid.append(node);
+function endNimGame(winner) {
+  nimGameOver = true;
+  nimTake.disabled = true;
+  if (winner === "you") {
+    nimWins += 1;
+    nimStatus.textContent = "You won.";
+  } else {
+    opponentWins += 1;
+    nimStatus.textContent = "The opponent won.";
   }
+  nimScore.value = `You ${nimWins} · Opponent ${opponentWins}`;
+  const move = winningNimMove(nimInitialHeaps);
+  const target = nimInitialHeaps[move.pile] - move.take;
+  const zeroPosition = [...nimInitialHeaps];
+  zeroPosition[move.pile] = target;
+  const width = Math.max(...nimInitialHeaps).toString(2).length;
+  const binary = zeroPosition.map((heap) => heap.toString(2).padStart(width, "0")).join(" ⊕ ");
+  nimProof.className = "nim-proof";
+  nimProof.replaceChildren();
+  const explanation = document.createElement("p");
+  explanation.textContent = `The winning first move was pile ${move.pile + 1}: ${nimInitialHeaps[move.pile]} → ${target}.`;
+  const equation = document.createElement("p");
+  equation.className = "nim-binary";
+  equation.textContent = `${binary} = 0`;
+  const rule = document.createElement("p");
+  rule.textContent = "A zero nim-sum leaves no winning reply against perfect play.";
+  nimProof.append(explanation, equation, rule);
+  nimExplanation.hidden = false;
+  renderNim();
 }
 
-updatePathGrid();
+function opponentNimMove() {
+  const move = winningNimMove(nimHeaps);
+  nimHeaps[move.pile] -= move.take;
+  if (nimHeaps.every((heap) => heap === 0)) {
+    endNimGame("opponent");
+    return;
+  }
+  nimStatus.textContent = `Opponent took ${move.take} from pile ${move.pile + 1}. Your turn.`;
+  renderNim();
+}
+
+nimTake.addEventListener("click", () => {
+  if (!nimSelection || nimGameOver) {
+    return;
+  }
+  nimHeaps[nimSelection.pile] -= nimSelection.take;
+  nimSelection = null;
+  nimTake.disabled = true;
+  if (nimHeaps.every((heap) => heap === 0)) {
+    endNimGame("you");
+    return;
+  }
+  opponentNimMove();
+});
+
+nimNew.addEventListener("click", () => {
+  nimPositionIndex = (nimPositionIndex + 1) % NIM_POSITIONS.length;
+  nimHeaps = [...NIM_POSITIONS[nimPositionIndex]];
+  nimInitialHeaps = [...nimHeaps];
+  nimSelection = null;
+  nimGameOver = false;
+  nimTake.disabled = true;
+  nimExplanation.hidden = true;
+  nimExplanation.open = false;
+  nimStatus.textContent = "You move first. Take any number of stones from one pile.";
+  renderNim();
+});
+
+renderNim();
 
 const PUZZLE_198 = "..9.....3.1..7.......5.86...4......7.2.....9.5......8...63.5.......9..1.8.....2..";
 const sudokuGrid = document.querySelector("#sudoku-grid");
