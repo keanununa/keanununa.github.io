@@ -68,7 +68,6 @@ nav a,
 .as-of,
 .status,
 .pdf-link,
-.log-entry time,
 .site-footer a {
   font-family: var(--mono);
   font-size: 12px;
@@ -159,7 +158,7 @@ h3 {
 .label,
 .as-of,
 .status,
-.log-entry time {
+.puzzle-section .result {
   color: var(--muted);
 }
 
@@ -250,8 +249,7 @@ figcaption p {
   margin-bottom: 8px;
 }
 
-.research-section,
-.log-section {
+.research-section {
   scroll-margin-top: 64px;
   padding: 96px 64px;
   border-bottom: 1px solid var(--line);
@@ -280,23 +278,6 @@ figcaption p {
   border-bottom: 1px solid var(--ink);
 }
 
-.log-entry {
-  display: grid;
-  grid-template-columns: 160px minmax(0, 62ch);
-  gap: 32px;
-  max-width: 960px;
-  padding: 24px 0;
-  border-top: 1px solid var(--line);
-}
-
-.log-entry:last-child {
-  border-bottom: 1px solid var(--line);
-}
-
-.log-entry p {
-  margin-bottom: 0;
-}
-
 .site-footer {
   display: flex;
   flex-wrap: wrap;
@@ -319,8 +300,7 @@ figcaption p {
     padding-left: 0;
   }
 
-  .research-section,
-  .log-section {
+  .research-section {
     padding: 64px 24px;
   }
 
@@ -378,10 +358,6 @@ figcaption p {
     padding: 24px 0;
   }
 
-  .log-entry {
-    grid-template-columns: 1fr;
-    gap: 8px;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
