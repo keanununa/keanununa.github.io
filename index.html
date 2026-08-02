@@ -83,6 +83,14 @@
 
       <section class="research-section" id="mathematics">
         <h2>Mathematics research</h2>
+        <figure class="mini-lab path-lab">
+          <div class="lab-heading">
+            <p class="label">Lattice paths</p>
+            <output id="path-count" aria-live="polite">252 paths</output>
+          </div>
+          <div id="path-grid" class="path-grid" role="grid" aria-label="Five by five lattice path grid. Select an interior point to block it."></div>
+          <figcaption>Choose an interior point. Paths move right or down.</figcaption>
+        </figure>
         <article class="project-card">
           <h3>Do Inert Patterns Explain Sudoku Difficulty?</h3>
           <p class="result">138 puzzles. 5 x 20 CV folds. All 4 metrics worse out of sample.</p>
@@ -93,6 +101,25 @@
 
       <section class="research-section puzzle-section" id="puzzles">
         <h2>Puzzles</h2>
+        <figure class="mini-lab sudoku-lab">
+          <div class="lab-heading">
+            <p class="label">Candidate grid</p>
+            <output id="sudoku-result" aria-live="polite">2 · 7 appears twice</output>
+          </div>
+          <div id="sudoku-grid" class="sudoku-grid" aria-label="Sudoku box containing a naked pair">
+            <button class="sudoku-cell pair-cell" type="button" data-candidates="2,7" aria-label="Candidates 2 and 7. Apply naked pair."><span>2</span><span>7</span></button>
+            <button class="sudoku-cell pair-cell" type="button" data-candidates="2,7" aria-label="Candidates 2 and 7. Apply naked pair."><span>2</span><span>7</span></button>
+            <div class="sudoku-cell" data-candidates="1,2,5"><span>1</span><span data-remove>2</span><span>5</span></div>
+            <div class="sudoku-cell" data-candidates="3,6"><span>3</span><span>6</span></div>
+            <div class="sudoku-cell" data-candidates="4,7,8"><span>4</span><span data-remove>7</span><span>8</span></div>
+            <div class="sudoku-cell" data-candidates="2,5"><span data-remove>2</span><span>5</span></div>
+            <div class="sudoku-cell" data-candidates="1,8"><span>1</span><span>8</span></div>
+            <div class="sudoku-cell" data-candidates="4,7"><span>4</span><span data-remove>7</span></div>
+            <div class="sudoku-cell" data-candidates="3,9"><span>3</span><span>9</span></div>
+          </div>
+          <button id="sudoku-reset" class="lab-action" type="button" hidden>Reset</button>
+          <figcaption>Select either 2 · 7 cell.</figcaption>
+        </figure>
         <article class="project-card">
           <h3>Sudoku and chess post-mortems</h3>
           <p class="result">0 published. First Sudoku post-mortem in preparation.</p>
