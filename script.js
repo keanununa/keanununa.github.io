@@ -26,6 +26,19 @@ const anhydrousOutput = document.querySelector("#weight-anhydrous");
 const hydrousOutput = document.querySelector("#weight-hydrous");
 const parityOutput = document.querySelector("#parity-price");
 const blendedOutput = document.querySelector("#blended-return");
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+const AUTO_WEIGHTS = [
+  { sugar: 1 / 3, anhydrous: 1 / 3, hydrous: 1 / 3 },
+  { sugar: 0.72, anhydrous: 0.14, hydrous: 0.14 },
+  { sugar: 0.14, anhydrous: 0.72, hydrous: 0.14 },
+  { sugar: 0.14, anhydrous: 0.14, hydrous: 0.72 }
+];
+const AUTO_SEGMENT_MS = 8000;
+const AUTO_RESUME_MS = 4000;
+
+let animationFrame = 0;
+let animationStart = 0;
+let resumeTimer = 0;
 
 function sugarATR(price, fx, polPremium, logistics) {
   const fobUSD = (price + polPremium) * USD_PER_TONNE_PER_CENT;
@@ -140,11 +153,58 @@ function pointerPosition(event) {
   return svgPoint.matrixTransform(simplex.getScreenCTM().inverse());
 }
 
+function interpolateWeights(start, end, amount) {
+  const eased = amount * amount * (3 - (2 * amount));
+  return {
+    sugar: start.sugar + ((end.sugar - start.sugar) * eased),
+    anhydrous: start.anhydrous + ((end.anhydrous - start.anhydrous) * eased),
+    hydrous: start.hydrous + ((end.hydrous - start.hydrous) * eased)
+  };
+}
+
+function animateSimplex(timestamp) {
+  if (reducedMotion.matches) {
+    return;
+  }
+
+  if (!animationStart) {
+    animationStart = timestamp;
+  }
+
+  const elapsed = timestamp - animationStart;
+  const segment = Math.floor(elapsed / AUTO_SEGMENT_MS) % AUTO_WEIGHTS.length;
+  const nextSegment = (segment + 1) % AUTO_WEIGHTS.length;
+  const progress = (elapsed % AUTO_SEGMENT_MS) / AUTO_SEGMENT_MS;
+  const weights = interpolateWeights(AUTO_WEIGHTS[segment], AUTO_WEIGHTS[nextSegment], progress);
+  display(cartesian(weights));
+  animationFrame = window.requestAnimationFrame(animateSimplex);
+}
+
+function stopAutoMotion() {
+  window.cancelAnimationFrame(animationFrame);
+  window.clearTimeout(resumeTimer);
+  animationFrame = 0;
+  animationStart = 0;
+}
+
+function startAutoMotion() {
+  stopAutoMotion();
+  if (!reducedMotion.matches) {
+    animationFrame = window.requestAnimationFrame(animateSimplex);
+  }
+}
+
+function resumeAutoMotionLater() {
+  window.clearTimeout(resumeTimer);
+  resumeTimer = window.setTimeout(startAutoMotion, AUTO_RESUME_MS);
+}
+
 function updateFromPointer(event) {
   display(pointerPosition(event));
 }
 
 simplex.addEventListener("pointerdown", (event) => {
+  stopAutoMotion();
   simplex.setPointerCapture(event.pointerId);
   updateFromPointer(event);
 });
@@ -159,7 +219,10 @@ simplex.addEventListener("pointerup", (event) => {
   if (simplex.hasPointerCapture(event.pointerId)) {
     simplex.releasePointerCapture(event.pointerId);
   }
+  resumeAutoMotionLater();
 });
+
+simplex.addEventListener("pointercancel", resumeAutoMotionLater);
 
 simplex.addEventListener("keydown", (event) => {
   const movement = {
@@ -174,13 +237,24 @@ simplex.addEventListener("keydown", (event) => {
   }
 
   event.preventDefault();
+  stopAutoMotion();
   const current = {
     x: Number(simplex.dataset.x || 300),
     y: Number(simplex.dataset.y || 256)
   };
   display({ x: current.x + movement.x, y: current.y + movement.y });
+  resumeAutoMotionLater();
 });
 
 display(cartesian({ sugar: 1 / 3, anhydrous: 1 / 3, hydrous: 1 / 3 }));
+startAutoMotion();
+
+reducedMotion.addEventListener("change", () => {
+  if (reducedMotion.matches) {
+    stopAutoMotion();
+  } else {
+    startAutoMotion();
+  }
+});
 
 void ATR_PER_KG_SUGAR_DOMESTIC;
