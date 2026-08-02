@@ -409,7 +409,12 @@ button.sudoku-cell.is-selected {
 }
 
 .puzzle-note {
+  max-width: 62ch;
   margin-bottom: 0;
+}
+
+.puzzle-takeaway .label {
+  margin-bottom: 16px;
 }
 
 .lab-action {
