@@ -257,4 +257,83 @@ reducedMotion.addEventListener("change", () => {
   }
 });
 
+const pathGrid = document.querySelector("#path-grid");
+const pathCount = document.querySelector("#path-count");
+const GRID_SIZE = 6;
+let blockedPathNode = null;
+
+function countLatticePaths(blocked) {
+  const counts = Array.from({ length: GRID_SIZE }, () => Array(GRID_SIZE).fill(0));
+  counts[0][0] = 1;
+  for (let row = 0; row < GRID_SIZE; row += 1) {
+    for (let column = 0; column < GRID_SIZE; column += 1) {
+      if (blocked && blocked.row === row && blocked.column === column) {
+        counts[row][column] = 0;
+        continue;
+      }
+      if (row === 0 && column === 0) {
+        continue;
+      }
+      counts[row][column] = (row > 0 ? counts[row - 1][column] : 0) + (column > 0 ? counts[row][column - 1] : 0);
+    }
+  }
+  return counts[GRID_SIZE - 1][GRID_SIZE - 1];
+}
+
+function updatePathGrid() {
+  pathCount.value = `${countLatticePaths(blockedPathNode)} paths`;
+  pathGrid.querySelectorAll(".path-node").forEach((node) => {
+    const isBlocked = blockedPathNode && Number(node.dataset.row) === blockedPathNode.row && Number(node.dataset.column) === blockedPathNode.column;
+    node.classList.toggle("is-blocked", Boolean(isBlocked));
+    node.setAttribute("aria-pressed", String(Boolean(isBlocked)));
+  });
+}
+
+for (let row = 0; row < GRID_SIZE; row += 1) {
+  for (let column = 0; column < GRID_SIZE; column += 1) {
+    const node = document.createElement("button");
+    const endpoint = (row === 0 && column === 0) || (row === GRID_SIZE - 1 && column === GRID_SIZE - 1);
+    node.type = "button";
+    node.className = `path-node${endpoint ? " is-endpoint" : ""}`;
+    node.dataset.row = String(row);
+    node.dataset.column = String(column);
+    node.setAttribute("role", "gridcell");
+    node.setAttribute("aria-label", endpoint ? (row === 0 ? "Start" : "Finish") : `Point ${row + 1}, ${column + 1}`);
+    node.disabled = endpoint;
+    if (!endpoint) {
+      node.addEventListener("click", () => {
+        const selected = { row, column };
+        blockedPathNode = blockedPathNode && blockedPathNode.row === row && blockedPathNode.column === column ? null : selected;
+        updatePathGrid();
+      });
+    }
+    pathGrid.append(node);
+  }
+}
+
+updatePathGrid();
+
+const pairCells = document.querySelectorAll(".pair-cell");
+const removableCandidates = document.querySelectorAll("[data-remove]");
+const sudokuResult = document.querySelector("#sudoku-result");
+const sudokuReset = document.querySelector("#sudoku-reset");
+
+function applyNakedPair() {
+  removableCandidates.forEach((candidate) => candidate.classList.add("is-removed"));
+  const solvedCell = document.querySelector('[data-candidates="2,5"]');
+  solvedCell.classList.add("is-single");
+  sudokuResult.value = "4 removed · 1 single";
+  sudokuReset.hidden = false;
+}
+
+function resetSudoku() {
+  removableCandidates.forEach((candidate) => candidate.classList.remove("is-removed"));
+  document.querySelector('[data-candidates="2,5"]').classList.remove("is-single");
+  sudokuResult.value = "2 · 7 appears twice";
+  sudokuReset.hidden = true;
+}
+
+pairCells.forEach((cell) => cell.addEventListener("click", applyNakedPair));
+sudokuReset.addEventListener("click", resetSudoku);
+
 void ATR_PER_KG_SUGAR_DOMESTIC;
