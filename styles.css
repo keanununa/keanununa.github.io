@@ -408,15 +408,6 @@ button.sudoku-cell.is-selected {
   color: var(--accent);
 }
 
-.puzzle-note {
-  max-width: 62ch;
-  margin-bottom: 0;
-}
-
-.puzzle-takeaway .label {
-  margin-bottom: 16px;
-}
-
 .lab-action {
   margin-top: 24px;
   padding: 8px 0;
